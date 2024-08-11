@@ -1,9 +1,9 @@
 import amqplib from "amqplib";
 
-const queue = "product_inventory";
+const queue = process.argv[2];
 const text = {
-  itemId: "nuevo mensaje",
-  text: process.argv[2],
+  id: "test_id",
+  text: process.argv[3],
 };
 
 async function sendMessage() {
@@ -15,7 +15,7 @@ async function sendMessage() {
     await channel.assertQueue(queue, { durable: false });
     channel.sendToQueue(queue, Buffer.from(JSON.stringify(text)));
 
-    console.log(" [x] Sent %s", text);
+    console.log(" [x] Message sent %s to %s ", text, queue);
 
     await channel.close();
   } catch (e) {

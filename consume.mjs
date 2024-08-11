@@ -1,6 +1,6 @@
 import amqplib from "amqplib";
 
-const queue = "product_inventory";
+const queue = procee.argv[2];
 
 async function consumeMessages() {
   try {
